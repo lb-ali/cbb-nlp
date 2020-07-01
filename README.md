@@ -7,8 +7,9 @@ This post was inspired by a paper called “Tie-breaker: Using language models t
 
 #### Dataset Description
 
-College basketball press-conference transcripts are collected from ASAP Sport’s website (http://asapsports.com/). For this study, post-game and pregame interviews for the NCAA Tournament are collected for games played between 2017 and 2019. This gives a dataset of a total of 4640 question snippets, 2320 of which are posed to men’s basketball players/coaches and 2320 of which are posed to women’s basketball players/coaches.
-	To model basketball game-specific language, commentary transcripts are collected from YouTube’s automatic transcription service (http://youtube.com/). Each commentary transcript contains a full game’s worth of commentary. Here is a sample, taken from the Oregon-Baylor women’s Final Four matchup (https://www.youtube.com/watch?v=MqIGIGnHS4E). 
+College basketball press-conference transcripts are collected from ASAP Sport’s website (http://asapsports.com/). For this study, post-game and pregame interviews for the NCAA Tournament are collected for games played between 2017 and 2019. This gives a dataset of a total of 4640 question snippets, 2320 of which are posed to men’s basketball players/coaches and 2320 of which are posed to women’s basketball players/coaches. To land on this number, I collected all questions from the 2019 men's tournament and collected enough questions from women's postseason tournaments to match this number. 
+	
+To model basketball game-specific language, commentary transcripts are collected from YouTube’s automatic transcription service (http://youtube.com/). Each commentary transcript contains a full game’s worth of commentary. Here is a sample, taken from the Oregon-Baylor women’s Final Four matchup (https://www.youtube.com/watch?v=MqIGIGnHS4E). 
 
 >*“...remember in women's college basketball we have the time out advance so there's gonna be a lot of time for Oregon **the** draw plays and certainly with the plethora of three-point shooters on their roster the Ducks aren't out of this one”*
 
