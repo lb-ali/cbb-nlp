@@ -10,7 +10,7 @@ year = '2019'
 #     mens_links = f.readlines()
 
 mens_links = [line.rstrip('\n')
-              for line in open('./data/%s/links/mens_links.txt' % year)]
+              for line in open('./data/%s/mens_links.txt' % year)]
 mens_ints = ''
 t1 = time.time()
 for link in mens_links:
@@ -22,12 +22,12 @@ for link in mens_links:
     # print(soup)
 t2 = time.time()
 dt = t2 - t1
-with open('./data/%s/links/mens_links.txt' % year, 'w') as f:
+with open('./data/%s/mens_ints.txt' % year, 'w') as f:
     f.write(mens_ints)
 print(dt)
 
 womens_links = [line.rstrip('\n')
-                for line in open('./data/%s/links/womens_links.txt' % year)]
+                for line in open('./data/%s/womens_links.txt' % year)]
 womens_ints = ''
 t1 = time.time()
 for link in womens_links:
@@ -39,7 +39,7 @@ for link in womens_links:
     # print(soup)
 t2 = time.time()
 dt = t2 - t1
-with open('./data/%s/links/womens_links.txt' % year, 'w') as f:
+with open('./data/%s/womens_ints.txt' % year, 'w') as f:
     f.write(womens_ints)
 # print(mens_ints)
 print(dt)
