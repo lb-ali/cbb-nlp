@@ -11,74 +11,118 @@ import scipy
 
 stop_words = set(stopwords.words('english'))
 
-year = 2019
-mensQuestionCount = 0
-womensQuestionCount = 0
+years = [2016, 2017, 2018, 2019]
+
+# years = [2016, 2017, 2018, 2019]
+
 mensWords = []
 womensWords = []
 mensQuestions = []
 womensQuestions = []
+mensPerplexity = []
+womensPerplexity = []
+for year in years:
 
-# mens words
-f = open("./data/%s/mens_ints.txt" % year, "r")
-questionsWithStopWords = []
-for line in f:
-    if(line[0] == "Q"):
-        questionsWithStopWords.append(line)
-        mensQuestions.append(line)
-        mensQuestionCount = mensQuestionCount + 1
-for question in questionsWithStopWords:
-    word_tokens = word_tokenize(question)
-    for w in word_tokens:
-        if w not in stop_words and w != "Q" and w != "Q." and w != "'" and w != "," and w != "." and w != "?" and w != "'s" and w != "'ve" and w != "n't":
-            mensWords.append(w)
+    mensQuestionCount = 0
+    womensQuestionCount = 0
+    # mens words
+    f = open("./data/%s/mens_ints2.txt" % year, "r")
+    questionsWithStopWords = []
+    for line in f:
+        if(line[0] == "Q"):
+            questionsWithStopWords.append(line)
+            mensQuestions.append(line)
+            mensQuestionCount = mensQuestionCount + 1
+    for question in questionsWithStopWords:
+        word_tokens = word_tokenize(question)
+        for w in word_tokens:
+            if w not in stop_words and w != "Q" and w != "Q." and w != "'" and w != "," and w != "." and w != "?" and w != "'s" and w != "'ve" and w != "n't":
+                mensWords.append(w)
 
+    mensWords.sort()
+    mensWordCount = {}
+    lastWord = mensWords[0]
+    count = 1
 
-mensWords.sort()
-mensWordCount = {}
-lastWord = mensWords[0]
-count = 1
+    for word in mensWords:
+        if lastWord == word:
+            count = count+1
+        else:
+            mensWordCount.update({lastWord: count})
+            count = 1
+        lastWord = word
 
-for word in mensWords:
-    if lastWord == word:
-        count = count+1
-    else:
-        mensWordCount.update({lastWord: count})
-        count = 1
-    lastWord = word
+    print(str(year) + " mens question count: " + str(mensQuestionCount))
 
-print("Mens question count: " + str(mensQuestionCount))
+    # womens words
+    f = open("./data/%s/womens_ints2.txt" % year, "r")
+    questionsWithStopWords = []
+    for line in f:
+        if(line[0] == "Q"):
+            questionsWithStopWords.append(line)
+            womensQuestions.append(line)
+            womensQuestionCount = mensQuestionCount + 1
+    for question in questionsWithStopWords:
+        word_tokens = word_tokenize(question)
+        for w in word_tokens:
+            if w not in stop_words and w != "Q" and w != "Q." and w != "'" and w != "," and w != "." and w != "?" and w != "'s" and w != "'ve" and w != "n't":
+                womensWords.append(w)
 
-# womens words
-f = open("./data/%s/womens_ints.txt" % year, "r")
-questionsWithStopWords = []
-for line in f:
-    if(line[0] == "Q"):
-        questionsWithStopWords.append(line)
-        womensQuestions.append(line)
-        womensQuestionCount = mensQuestionCount + 1
-for question in questionsWithStopWords:
-    word_tokens = word_tokenize(question)
-    for w in word_tokens:
-        if w not in stop_words and w != "Q" and w != "Q." and w != "'" and w != "," and w != "." and w != "?" and w != "'s" and w != "'ve" and w != "n't":
-            womensWords.append(w)
+    womensWords.sort()
+    womensWordCount = {}
+    lastWord = womensWords[0]
+    count = 1
 
+    for word in womensWords:
+        if lastWord == word:
+            count = count+1
+        else:
+            womensWordCount.update({lastWord: count})
+            count = 1
+        lastWord = word
 
-womensWords.sort()
-womensWordCount = {}
-lastWord = womensWords[0]
-count = 1
+    # sorted_words = sorted(womensWordCount.items(),
+    #                       key=lambda x: x[1], reverse=True)
 
-for word in womensWords:
-    if lastWord == word:
-        count = count+1
-    else:
-        womensWordCount.update({lastWord: count})
-        count = 1
-    lastWord = word
+    # for i in sorted_words[0:20]:
+    #     print(i[0] + ": " + str(i[1]))
+    print(str(year) + " womens question count: " + str(womensQuestionCount))
 
+    # totalPerplexity = 0
+    # count = 0
+    # mensPerplexities = []
+    # womensPerplexities = []
+    # model = kenlm.LanguageModel('yourLM.klm')
 
-print("Womens question count: " + str(womensQuestionCount))
+    # for question in womensQuestions[0:len(mensQuestions)]:
+    #     totalPerplexity = totalPerplexity + model.perplexity(question)
+    #     count = count + 1
+    #     womensPerplexities.append(model.perplexity(question))
+
+    # womensPerplexity.append(totalPerplexity/count)
+
+    # totalPerplexity = 0
+    # count = 0
+
+    # for question in mensQuestions:
+    #     totalPerplexity = totalPerplexity + model.perplexity(question)
+    #     count = count + 1
+    #     mensPerplexities.append(model.perplexity(question))
+
+    # mensPerplexity.append(totalPerplexity/count)
+
+    # statistic, pvalue = scipy.stats.wilcoxon(
+    #     womensPerplexities, mensPerplexities, alternative='greater')
+    # print(statistic)
+    # print(pvalue)
+    # if pvalue < 0.05:
+    #     print("The p-value of " + str(pvalue) +
+    #           " is statistically significant at p < .05.")
+
+# plt.plot(years, womensPerplexity, label="Women's")
+# plt.plot(years, mensPerplexity, alpha=0.5, label="Men's")
+# plt.legend()
+# plt.show()
 
 
 totalPerplexity = 0
@@ -102,10 +146,12 @@ for question in mensQuestions:
     count = count + 1
     mensPerplexities.append(model.perplexity(question))
 
+print("Total womens question count: " + str(len(womensQuestions)))
+print("Total mens question count: " + str(len(mensQuestions)))
 
 mensPerplexity = (totalPerplexity/count)
 statistic, pvalue = scipy.stats.mannwhitneyu(
-    womensPerplexities, mensPerplexities)
+    womensPerplexities, mensPerplexities, alternative='greater')
 print(statistic)
 print(pvalue)
 if pvalue < 0.05:
