@@ -11,22 +11,20 @@ import scipy
 
 stop_words = set(stopwords.words('english'))
 
-years = [2016, 2017, 2018, 2019]
-
-# years = [2016, 2017, 2018, 2019]
+years = [2016, 2017, 2018, 2019, 2020]
 
 mensWords = []
 womensWords = []
+
 mensQuestions = []
 womensQuestions = []
 mensPerplexity = []
 womensPerplexity = []
 for year in years:
-
     mensQuestionCount = 0
     womensQuestionCount = 0
     # mens words
-    f = open("./data/%s/mens_ints2.txt" % year, "r")
+    f = open("./data/%s/mens_ints2.txt" % str(year), "r")
     questionsWithStopWords = []
     for line in f:
         if(line[0] == "Q"):
@@ -111,7 +109,7 @@ for year in years:
 
     # mensPerplexity.append(totalPerplexity/count)
 
-    # statistic, pvalue = scipy.stats.wilcoxon(
+    # statistic, pvalue = scipy.stats.mannwhitneyu(
     #     womensPerplexities, mensPerplexities, alternative='greater')
     # print(statistic)
     # print(pvalue)
