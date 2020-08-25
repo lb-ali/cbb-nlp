@@ -124,30 +124,30 @@ for year in years:
 
 
 totalPerplexity = 0
-count = 0
+count1 = 0
 mensPerplexities = []
 womensPerplexities = []
 model = kenlm.LanguageModel('yourLM.klm')
 
 for question in womensQuestions:
     totalPerplexity = totalPerplexity + model.perplexity(question)
-    count = count + 1
+    count1 = count1 + 1
     womensPerplexities.append(model.perplexity(question))
 
-womensPerplexity = (totalPerplexity/count)
+womensPerplexity = (totalPerplexity/count1)
 
 totalPerplexity = 0
-count = 0
+count2 = 0
 
 for question in mensQuestions:
     totalPerplexity = totalPerplexity + model.perplexity(question)
-    count = count + 1
+    count2 = count2 + 1
     mensPerplexities.append(model.perplexity(question))
 
-print("Total womens question count: " + str(len(womensQuestions)))
-print("Total mens question count: " + str(len(mensQuestions)))
+print("Total womens question count: " + str(count1))
+print("Total mens question count: " + str(count2))
 
-mensPerplexity = (totalPerplexity/count)
+mensPerplexity = (totalPerplexity/count2)
 statistic, pvalue = scipy.stats.mannwhitneyu(
     womensPerplexities, mensPerplexities, alternative='greater')
 print(statistic)
