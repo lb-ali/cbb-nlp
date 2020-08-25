@@ -7,7 +7,7 @@ This post was inspired by a paper called “Tie-breaker: Using language models t
 
 #### Dataset Description
 
-College basketball press-conference transcripts are collected from ASAP Sport’s website (http://asapsports.com/). For this study, post-game and pregame interviews for the NCAA Tournament are collected for games played between 2017 and 2019. This gives a dataset of a total of 4640 question snippets, 2320 of which are posed to men’s basketball players/coaches and 2320 of which are posed to women’s basketball players/coaches. To land on this number, I collected all questions from the 2019 men's tournament and collected enough questions from women's postseason tournaments to match this number. 
+College basketball press-conference transcripts are collected from ASAP Sport’s website (http://asapsports.com/). For this study, post-game and pregame interviews are collected for games played between 2016 and 2020. This gives a dataset of a total of 17085 question snippets, 8669 of which are posed to men’s basketball players/coaches and 8416 of which are posed to women’s basketball players/coaches. To land on this number, I collected all questions from all available postseason tournaments between 2016 and 2020, while making sure there was not a significant difference between the size of the two groups. 
 	
 To model basketball game-specific language, commentary transcripts are collected from YouTube’s automatic transcription service (http://youtube.com/). Each commentary transcript contains a full game’s worth of commentary. Here is a sample, taken from the Oregon-Baylor women’s Final Four matchup (https://www.youtube.com/watch?v=MqIGIGnHS4E). 
 
@@ -25,7 +25,7 @@ As exploratory data analysis, a word-level analysis is applied to quantify diffe
 
 #### Methodology
 
-The gender-balanced set of commentary transcripts is used to train a bigram language model using KenLM. KenLM uses the modified Kneser-Ney smoothing method. This is widely considered one of the best smoothing methods for n-gram language models (Teh, 2006). This model will be used to quantify how game-related a question is. 
+The gender-balanced set of commentary transcripts is used to train a bigram language model using KenLM. KenLM uses the modified Kneser-Ney smoothing method. This model will be used to quantify how game-related a question is. 
 For a question q, its perplexity is measured with respect to the game-specific language model Pcommentary. This perplexity measure shows how game-related a question is: a higher perplexity measure suggest the question is less game-related. Perplexity is a standard measure of language-model fit. For an n-word sequence w1w2 … wn perplexity is calculated as follows:
 
 Sample questions of low-perplexity and high-perplexity values are provided:
@@ -40,7 +40,7 @@ Question: *What is your background as far as your mother played sports here?*
 
 #### Results
 
-Perplexities for each question are computed and then grouped by the gender of the athletes: male coaches of women’s basketball teams fall under the women’s category. The Mann-Whitney U statistical significance test is used. After testing perplexity values between the two groups, it is found that the mean perplexity of questions posed to women’s basketball players/coaches is significantly larger (p-value = 0.0327) than the mean perplexity of questions posed to men’s basketball players/coaches. These findings suggest that the questions posed to men’s basketball players/coaches are more game-related than the questions posed to women’s basketball players/coaches. 
+Perplexities for each question are computed and then grouped by the gender of the athletes: male coaches of women’s basketball teams fall under the women’s category. The Mann-Whitney U statistical significance test is used. After testing perplexity values between the two groups, it is found that the mean perplexity of questions posed to women’s basketball players/coaches is significantly larger (p-value = 0.0299) than the mean perplexity of questions posed to men’s basketball players/coaches. These findings suggest that the questions posed to men’s basketball players/coaches are more game-related than the questions posed to women’s basketball players/coaches. 
 
 ##### Works Cited: 
 
